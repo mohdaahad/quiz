@@ -15,7 +15,7 @@
     "caniuse-lite": "^1.0.30001591",
     "os-browserify": "^0.3.0",
     "package": "^1.0.1",
-    "react": "^18.2.0",
+    "react": "^17.0.2",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.11.1",
     "react-scripts": "5.0.1",
