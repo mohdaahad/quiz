@@ -17,7 +17,6 @@ const QuizInput = () => {
   const [correctOption, setCorrectOption] = useState('');
   const [courseId, setCourseId] = useState('');
   const [courses, setCourses] = useState([]);
-  const [ip, setIp] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -25,15 +24,8 @@ const QuizInput = () => {
     const fetchCourses = async () => {
       try {
         // Fetch courses from the backend
-        const currentUrl = window.location.href;
-        const url = new URL(currentUrl);
-        const ipAddress = url.hostname;
 
-        const responseIp = await axios.get(`http://${ipAddress}:8081/getIP`);
-        const ip = responseIp.data.ip;
-        setIp(ip);
-
-        const response = await axios.get(`${ip}/courses`);
+        const response = await axios.get(`https://quiz-4.onrender.com/courses`);
         setCourses(response.data.courses);
       } catch (error) {
         console.error('Error fetching courses:', error);
@@ -73,7 +65,7 @@ const QuizInput = () => {
 
   const handleSaveQuiz = async () => {
     try {
-      const response = await axios.post(`${ip}/quizzes`, {
+      const response = await axios.post(`https://quiz-4.onrender.com/quizzes`, {
         course_id: courseId,
         question: question,
         option1: option1,

@@ -53,13 +53,8 @@ function SummaryComponent() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const currentUrl = window.location.href;
-        const url = new URL(currentUrl);
-        const ipAddress = url.hostname;
-
-        const responseIp = await axios.get(`http://${ipAddress}:8081/getIP`);
-        const ip = responseIp.data.ip;
-        const response = await axios.get(`${ip}/attempts/${attemptId}`, { withCredentials: true });
+       
+        const response = await axios.get(`https://quiz-4.onrender.com/attempts/${attemptId}`, { withCredentials: true });
         setData(response.data.result);
         const scorepercentage = (response.data.result.total_score * 100 )/(response.data.result.quiz_count) ;
         scorePercentage(scorepercentage)

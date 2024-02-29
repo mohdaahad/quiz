@@ -16,19 +16,7 @@ function Attempts() {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
-  const getIpAddress = async () => {
-    try {
-      const currentUrl = window.location.href;
-      const url = new URL(currentUrl);
-      const ipAddress = url.hostname;
 
-      const responseIp = await axios.get(`http://${ipAddress}:8081/getIP`);
-      const ip = responseIp.data.ip;
-    } catch (error) {
-      console.error('Error fetching IP address:', error);
-      throw new Error('Failed to fetch IP address');
-    }
-  };
   const getAttemptCategory = (score, totalQuestions) => {
     const percentage = (score / totalQuestions) * 100;
   
@@ -56,8 +44,8 @@ function Attempts() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const ip = await getIpAddress();
-        const response = await axios.get(`${ip}/attempts/user/${userId}/${courseId}`);
+       
+        const response = await axios.get(`https://quiz-4.onrender.com/attempts/user/${userId}/${courseId}`);
         const { attempts, totalQuestions } = response.data;
         
         // Set the state with the fetched data

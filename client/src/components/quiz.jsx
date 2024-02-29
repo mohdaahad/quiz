@@ -11,23 +11,16 @@ function SurveyComponent() {
     const navigate = useNavigate();
     const [id, setId] = useState('');
     const [json, setjson] = useState('');
-    const [ip, setIp] = useState('');
     axios.defaults.withCredentials = true;
     useEffect(() => {
       const fetchData = async () => {
         
         try {
       
-          const currentUrl = window.location.href;
-          const url = new URL(currentUrl);
-          const ipAddress = url.hostname;
+        
   
-          const responseIp = await axios.get(`http://${ipAddress}:8081/getIP`);
-          const ip = responseIp.data.ip;
-          setIp(ip);
-    
           // Second request using the obtained IP
-          const responseQuiz = await axios.get(`${ip}/valid`, { withCredentials: true });
+          const responseQuiz = await axios.get(`https://quiz-4.onrender.com/valid`, { withCredentials: true });
           if (responseQuiz.data.valid) {
             setId(responseQuiz.data.id);
           } else {
@@ -35,7 +28,7 @@ function SurveyComponent() {
           }
     
           // Third request using the obtained IP
-          const responseJson = await axios.get(`${ip}/json?courseId=${courseId}`, { withCredentials: true });
+          const responseJson = await axios.get(`https://quiz-4.onrender.com/json?courseId=${courseId}`, { withCredentials: true });
 
           if (responseJson.data) {
             setjson(responseJson.data);
@@ -73,7 +66,7 @@ function SurveyComponent() {
 
         });
         const score = Object.values(quizResult).filter(Boolean).length;
-        axios.post(`${ip}/attempts`,{
+        axios.post(`https://quiz-4.onrender.com/attempts`,{
           user_id:id,
           total_score:score,
           course_id:courseId
@@ -84,7 +77,7 @@ function SurveyComponent() {
             const attemptId = response.data.attemptId; // Adjust the property name based on your server response
               if (attemptId) {     
                for(let i=0;i<answerArr.length;i++){
-                axios.post(`${ip}/results`, {
+                axios.post(`https://quiz-4.onrender.com/results`, {
                   attempt_id: attemptId,
                   quiz_id:answerArr[i].quizId,
                   selected_option:answerArr[i].userAnswer,

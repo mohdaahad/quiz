@@ -22,13 +22,8 @@ function ReviewComponent() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const currentUrl = window.location.href;
-        const url = new URL(currentUrl);
-        const ipAddress = url.hostname;
-
-        const responseIp = await axios.get(`http://${ipAddress}:8081/getIP`);
-        const ip = responseIp.data.ip;
-        const response = await axios.get(`${ip}/results/${attemptId}`, { withCredentials: true });
+       
+        const response = await axios.get(`https://quiz-4.onrender.com/results/${attemptId}`, { withCredentials: true });
         setData(response.data.result);
       } catch (error) {
         console.error('Error fetching data:', error);

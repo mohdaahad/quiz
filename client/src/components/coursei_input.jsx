@@ -16,15 +16,9 @@ const CourseInput = () => {
 
   const handleSaveCourse = async () => {
     try {
-      const currentUrl = window.location.href;
-      const url = new URL(currentUrl);
-      const ipAddress = url.hostname;
-
-      const responseIp = await axios.get(`http://${ipAddress}:8081/getIP`);
-      const ip = responseIp.data.ip;
-
+    
       
-      const response = await axios.post(`${ip}/courses`, {
+      const response = await axios.post(`https://quiz-4.onrender.com/courses`, {
         courseName: courseName,
       });
 

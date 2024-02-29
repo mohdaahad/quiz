@@ -76,7 +76,6 @@ function Home(props) {
   const navigate = useNavigate();
   const [name, setName] = useState('');
   const [quiz, setquiz] = useState('');
-  const [ip, setIp] = useState('');
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [courses, setCourses] = useState([]);
   const [userId, setUserId] = useState('');
@@ -96,16 +95,10 @@ function Home(props) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const currentUrl = window.location.href;
-        const url = new URL(currentUrl);
-        const ipAddress = url.hostname;
-
-        const responseIp = await axios.get(`http://${ipAddress}:8081/getIP`);
-        const ip = responseIp.data.ip;
-        setIp(ip);
-        const responseCourses = await axios.get(`${ip}/courses`, { withCredentials: true });
+        const responseCourses = await axios.get(`https://quiz-4.onrender.com/courses`, { withCredentials: true });
         setCourses(responseCourses.data.courses);
-        const responseQuiz = await axios.get(`${ip}/valid`, { withCredentials: true });
+        const responseQuiz = await axios.get(`https://quiz-4.onrender.com/valid`, { withCredentials: true });
+        console.log(responseQuiz.data.valid)
         if (responseQuiz.data.valid) {
           setName(responseQuiz.data.fullname);
           setquiz(responseQuiz.data.quiz);
@@ -121,7 +114,7 @@ function Home(props) {
   }, [navigate]);
  
   const handleLogout = () => {
-    axios.post(`${ip}/logout`)
+    axios.post(`https://quiz-4.onrender.com/logout`)
       .then(res => navigate('/sign-in'))
       .catch(err => console.log(err));
   };
@@ -134,7 +127,7 @@ function Home(props) {
   const handleQuiz = async (courseId) => {
     try {
       // Check if the user has attempted the quiz for the selected course
-      const responseAttempts = await axios.get(`${ip}/attempts/${userId}/${courseId}`, { withCredentials: true });
+      const responseAttempts = await axios.get(`https://quiz-4.onrender.com/attempts/${userId}/${courseId}`, { withCredentials: true });
       const attempts = responseAttempts.data;
   
       if (attempts.length > 0) {

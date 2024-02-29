@@ -30,7 +30,7 @@ export default function SignUp() {
   const [classSelectionError, setClassSelectionError] = useState(false);
   const [classes, setClasses] = useState([]);
   const [registerStatus, setRegisterStatus] = useState("");
-  const [ip, setIp] = useState('');
+
   const navigate = useNavigate();
   Axios.defaults.withCredentials = true;
 
@@ -38,22 +38,16 @@ export default function SignUp() {
     const fetchData = async () => {
       try {
         // First request to get IP
-        const currentUrl = window.location.href;
-        const url = new URL(currentUrl);
-        const ipAddress = url.hostname;
-
-        const responseIp = await Axios.get(`http://${ipAddress}:8081/getIP`);
-        const ip = responseIp.data.ip;
-        setIp(ip);
+      
 
         // Second request using the obtained IP
-        const responseValidation = await Axios.get(`${ip}/valid`);
+        const responseValidation = await Axios.get(`https://quiz-4.onrender.com/valid`);
 
         if (responseValidation.data.valid) {
           // If the data is valid, navigate to the home page
           navigate('/');
         }
-        const classesResponse = await Axios.get(`${ip}/classes`);
+        const classesResponse = await Axios.get(`https://quiz-4.onrender.com/classes`);
         setClasses(classesResponse.data.classes);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -124,7 +118,7 @@ export default function SignUp() {
       validateDob(dob) &&
       validateClassSelection(classSelection)
     ) {
-      Axios.post(`${ip}/sign-up`, {
+      Axios.post(`https://quiz-4.onrender.com/sign-up`, {
         email: email,
         username: username,
         password: password,

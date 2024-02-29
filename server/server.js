@@ -13,7 +13,7 @@ const wifiIPv4 = Object.values(os.networkInterfaces()).flatMap(interfaceData =>
 );
 
 const corsOptions = {
-  origin: ["http://localhost:3000", `http://${wifiIPv4[0]}:3000`],
+  origin: ["http://localhost:3000", `http://${wifiIPv4[0]}:3000`,'https://65e08b217ebc8c163e01f446--jade-frangipane-551b5c.netlify.app'],
   methods: ["POST", "GET"],
   credentials: true,
 };
