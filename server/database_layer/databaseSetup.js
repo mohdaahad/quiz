@@ -1,12 +1,16 @@
 const { Pool } = require('pg');
 
+// const db = new Pool({
+//   user: 'quizuser',
+//   host: 'localhost',
+//   database: 'quiz',
+//   password: 'Aahad@123',
+//   port: 5433,
+// });
+
 const db = new Pool({
-  user: 'quizuser',
-  host: 'localhost',
-  database: 'quiz',
-  password: 'Aahad@123',
-  port: 5433,
-});
+  connectionString: process.env.POSTGRES_URL ,
+})
 
 const createClassesTableQuery = `
   CREATE TABLE IF NOT EXISTS Classes (

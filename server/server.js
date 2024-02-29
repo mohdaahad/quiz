@@ -6,6 +6,7 @@ const os = require('os');
 const cookieParser = require("cookie-parser");
 const path = require('path')
 const app = express();
+// require('dotenv').config()
 
 const wifiIPv4 = Object.values(os.networkInterfaces()).flatMap(interfaceData =>
   interfaceData.find(item => item.family === 'IPv4' && !item.internal)?.address
