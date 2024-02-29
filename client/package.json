@@ -9,7 +9,7 @@
     "@mui/material": "^5.12.3",
     "@mui/styles": "^5.15.6",
     "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
+    "@testing-library/react": "^13.5.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.4.0",
     "caniuse-lite": "^1.0.30001591",
